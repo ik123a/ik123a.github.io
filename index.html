@@ -326,8 +326,14 @@
             </div>
           </div>
         </div>
-
       </div>
+
+      <!-- Dynamic More Projects Section -->
+      <div id="more-projects-container" class="reveal" style="margin-top: 80px; display: none;">
+        <h3 class="section-subtitle" style="text-align: center; margin-bottom: 30px; font-size: 1.5rem; color: var(--text-primary); font-weight: 600;">More GitHub Projects</h3>
+        <div id="more-projects-grid" class="more-projects-grid"></div>
+      </div>
+
     </div>
   </section>
 
@@ -753,6 +759,107 @@
         card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateZ(0) translateY(0)';
       });
     });
+
+    // ─── GITHUB DYNAMIC FETCH ─────────────────────
+    async function fetchGitHubData() {
+      const username = 'ik123a';
+      const curatedRepos = [
+        'rsna-pneumonia-detection-challenge',
+        'deepfake-detection',
+        'resnet50-transfer-learning-cifar',
+        'tv-trade',
+        'Zipwash',
+        'leetcode-nvidia-auto',
+        'gfg-nvidia-auto',
+        'ik123a.github.io'
+      ].map(name => name.toLowerCase());
+
+      try {
+        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
+        if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
+        const repos = await reposResponse.json();
+
+        // Calculate stats
+        let totalRepos = repos.length;
+        let totalStars = 0;
+        const languages = new Set();
+        const otherRepos = [];
+
+        repos.forEach(repo => {
+          totalStars += repo.stargazers_count;
+          if (repo.language) {
+            languages.add(repo.language);
+          }
+
+          const isCurated = curatedRepos.includes(repo.name.toLowerCase());
+          if (!isCurated && !repo.fork) {
+            otherRepos.push(repo);
+          }
+        });
+
+        // Try getting official profile public_repos count in case they have more than 100
+        const profileResponse = await fetch(`https://api.github.com/users/${username}`);
+        if (profileResponse.ok) {
+          const profile = await profileResponse.json();
+          totalRepos = profile.public_repos || totalRepos;
+        }
+
+        // Update UI counters with values
+        const reposCardValue = document.querySelector('#github-repos-card .github-card-value');
+        const languagesCardValue = document.querySelector('#github-languages-card .github-card-value');
+        const starsCardValue = document.querySelector('#github-stars-card .github-card-value');
+
+        if (reposCardValue) reposCardValue.textContent = totalRepos + '+';
+        if (languagesCardValue) languagesCardValue.textContent = languages.size;
+        if (starsCardValue) starsCardValue.textContent = totalStars + '+';
+
+        // Dynamic "More Projects" Rendering
+        const moreGrid = document.getElementById('more-projects-grid');
+        const moreContainer = document.getElementById('more-projects-container');
+
+        if (moreGrid && otherRepos.length > 0) {
+          moreGrid.innerHTML = '';
+          otherRepos.slice(0, 6).forEach(repo => {
+            const langClass = repo.language ? repo.language.toLowerCase().replace(/#/g, 'sharp').replace(/\+/g, 'plus') : 'other';
+            const card = document.createElement('a');
+            card.href = repo.html_url;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.className = 'mini-project-card';
+            card.innerHTML = `
+              <div class="mini-project-header">
+                <i class="fa-regular fa-folder mini-project-icon"></i>
+                <i class="fab fa-github mini-project-github-icon"></i>
+              </div>
+              <div class="mini-project-title">${repo.name.replace(/[-_]/g, ' ')}</div>
+              <div class="mini-project-desc">${repo.description || 'Dynamic repository showcasing open-source implementation and development.'}</div>
+              <div class="mini-project-meta">
+                <div class="mini-project-lang">
+                  <span class="mini-project-lang-dot ${langClass}"></span>
+                  ${repo.language || 'Plain Text'}
+                </div>
+                <div class="mini-project-stars">
+                  <i class="fa-solid fa-star"></i> ${repo.stargazers_count}
+                </div>
+              </div>
+            `;
+            moreGrid.appendChild(card);
+          });
+
+          if (moreContainer) {
+            moreContainer.style.display = 'block';
+            if (typeof revealObserver !== 'undefined') {
+              revealObserver.observe(moreContainer);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching GitHub stats:', err);
+      }
+    }
+
+    // Call fetch on load
+    fetchGitHubData();
 
   })();
   </script>

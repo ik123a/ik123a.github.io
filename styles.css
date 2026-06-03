@@ -1423,6 +1423,117 @@ footer {
   box-shadow: 0 0 10px var(--accent);
 }
 
+/* ─── DYNAMIC MORE PROJECTS ─── */
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.mini-project-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  transition: var(--transition);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-project-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 255, 65, 0.04), 0 0 20px rgba(0, 255, 65, 0.02);
+}
+
+.mini-project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mini-project-icon {
+  font-size: 1.3rem;
+  color: var(--accent);
+  transition: var(--transition);
+}
+
+.mini-project-github-icon {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.mini-project-card:hover .mini-project-github-icon {
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.mini-project-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.mini-project-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.mini-project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  padding-top: 12px;
+}
+
+.mini-project-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+
+.mini-project-lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+/* Common language dot colors */
+.mini-project-lang-dot.javascript { background-color: var(--accent-amber); }
+.mini-project-lang-dot.typescript { background-color: var(--accent-blue); }
+.mini-project-lang-dot.python { background-color: #3572A5; }
+.mini-project-lang-dot.jupyter { background-color: #DA5B0B; }
+.mini-project-lang-dot.html { background-color: #e34c26; }
+.mini-project-lang-dot.css { background-color: #563d7c; }
+
+.mini-project-stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.mini-project-stars i {
+  color: var(--accent-amber);
+}
+
 /* ═══ MEDIA QUERIES ═══ */
 @media (max-width: 1024px) {
   .hero-grid {
