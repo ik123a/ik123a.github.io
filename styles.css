@@ -1,439 +1,785 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
+
 :root {
-  --primary: #89b4fa;
-  /* This is the primary color. */
-  --secondary: #a6e3a1;
-  /* This is the secondary color. */
-  --bg: #1e1e2e;
-  /* This is the background color. */
-  --heading: #cdd6f4;
-  /* This is the color for headings. */
-  --text: #cdd6f4;
-  /* This is the color for text. */
+  --bg-base: #060913;          /* Deep dark hacker-navy base */
+  --bg-surface: #0d1222;       /* Surface containers / cards */
+  --bg-surface-hover: #141c32; /* Hovered cards */
+  --border-subtle: #1e293b;    /* Slate borders */
+  --border-glow: #00ff41;      /* Accent glow border */
+  --text-primary: #f8fafc;     /* Clear white titles */
+  --text-secondary: #94a3b8;   /* Slate description text */
+  --accent: #00ff41;           /* Terminal matrix green */
+  --accent-dim: rgba(0, 255, 65, 0.15); /* Accent highlight background */
+  --radius: 12px;              /* Shape Consistency Lock - all-soft */
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --font-mono: 'Geist Mono', monospace;
+  --font-sans: 'Geist', sans-serif;
 }
 
-body {
-  font-family: Inter, sans-serif;
-  /* This sets the font family. */
-  line-height: 1.3;
-  /* This sets the line height. */
-  background-color: var(--bg);
-  /* This sets the background color. */
-  color: var(--text);
-  /* This sets the text color. */
+/* Global Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg-base);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.port_about,
-.port_ed,
-.port_skills,
-.port_heading,
-.port_contact,
-.port_contri,
-.port_projects {
-  display: inline-block;
-  position: relative;
-  color: var(--primary);
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-.port_about::after,
-.port_skills::after,
-.port_ed::after,
-.port_heading::after,
-.port_contact::after,
-.port_contri::after,
-.port_projects::after {
-  content: '';
-  position: absolute;
+/* Typography Selection */
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* Layout Utilities */
+.container {
   width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--primary);
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.port_about:hover::after,
-.port_skills:hover::after,
-.port_ed:hover::after,
-.port_heading:hover::after,
-.port_contact:hover::after,
-.port_contri:hover::after,
-.port_projects:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+.grid {
+  display: grid;
+  gap: 24px;
 }
 
-
-h1,
-h2,
-h3 {
-  color: var(--heading);
-  /* This sets the color for headings. */
+/* Header & Nav */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px; /* Height Cap: 80px max */
+  background: rgba(6, 9, 19, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
 }
 
-h1 {
-  font-size: 5.5rem;
-  /* This sets the font size for h1 headings. */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-h2 {
-  font-size: 4rem;
-  /* This sets the font size for h2 headings. */
-  align-self: center;
-  /* This centers the h2 headings vertically. */
-  text-align: center;
-  /* This centers the h2 headings horizontally. */
+.logo-link {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-h3 {
-  font-size: 2.5rem;
-  /* This sets the font size for h3 headings. */
+.logo-link span {
+  color: var(--accent);
 }
 
-img {
-  max-width: 100%;
-  /* This sets the maximum width for images. */
-  border-radius: 10px;
-  /* This adds rounded corners to images. */
-  border: 2px solid var(--primary);
-  /* This adds a border around images. */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+nav a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+nav a:hover, nav a.active {
+  color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+  min-height: calc(100vh - 72px); /* Viewport stability: fit viewport */
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-cols: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Hero Stack Discipline: max 4 text elements */
+.hero-eyebrow { /* 1. Eyebrow */
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 12px;
+  border-radius: 9999px; /* Pill */
+  border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.hero-title { /* 2. Headline */
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  color: var(--text-primary);
+}
+
+.hero-title span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.hero-desc { /* 3. Subtext (<= 20 words & 4 lines) */
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 45ch;
+  line-height: 1.5;
+}
+
+.hero-actions { /* 4. CTAs */
+  display: flex;
+  gap: 16px;
+}
+
+/* Button & Interactive states */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #020617; /* High contrast dark text on neon background */
+}
+
+.btn-primary:hover {
+  background-color: #00e676;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Hero Terminal Box (Visual representation) */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminal-box {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.terminal-header {
+  background: #020617;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ef4444; }
+.terminal-dot.yellow { background: #f59e0b; }
+.terminal-dot.green { background: #10b981; }
+
+.terminal-title {
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.terminal-body {
+  padding: 16px;
+  color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px;
+}
+
+.terminal-line {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-line span.path {
+  color: var(--text-primary);
+}
+
+.terminal-line span.cmd {
+  color: var(--text-secondary);
+}
+
+.terminal-output {
+  color: #38bdf8; /* light blue output logs */
+}
+
+.terminal-output.success {
+  color: var(--accent);
+}
+
+/* Section Common Styling */
+section.section {
+  padding: 80px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.section-header {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: var(--text-primary);
+}
+
+.section-title span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  max-width: 60ch;
+  font-size: 1.05rem;
+}
+
+/* About / Intro Section */
+.about-grid {
+  display: grid;
+  grid-template-cols: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 1.1rem;
+}
+
+.about-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.about-avatar-glow {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.15;
+  filter: blur(10px);
 }
 
 .logo_syn {
-  transition: transform .7s ease-in-out;
-  max-width: 200px;
-  /* This sets the maximum width for the Profile Picture. */
-  border-radius: 100px;
-  /* This adds rounded corners to the Profile Picture. */
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--border-glow);
+  transition: transform 0.6s ease-in-out;
 }
 
 .logo_syn:hover {
-  transform: rotate(360deg);
+  transform: scale(1.05) rotate(5deg);
 }
 
-/* Header */
-
-header {
-  /* The header will have a background color of var(--bg). */
-  background-color: var(--bg);
-
-  /* The text in the header will be centered. */
-  text-align: center;
-
-  /* There will be padding of 20px at the top and bottom of the header. */
-  padding: 20px 0;
+/* Skills Section: 2x4 Grid System */
+.skills-grid {
+  grid-template-cols: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
 }
 
-
-nav a {
-  /* The nav links will have a margin of 10px, padding of 8px 15px, a border radius of 5px, no text decoration, and a color of var(--text). */
-  margin: 10px;
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: var(--text);
-  font-size: 200%;
-  border-radius: 100rem;
+.skill-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
 }
 
-.about_nav,
-.skills_nav,
-.projects_nav,
-.contact_nav {
-  transition: box-shadow .3s;
+.skill-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 255, 65, 0.05);
 }
 
-.about_nav:hover,
-.skills_nav:hover,
-.projects_nav:hover,
-.contact_nav:hover {
-  box-shadow: 0 0 100px #89b4fa85;
-  background: var(--primary);
-  color: var(--bg);
-  border-radius: 100rem;
+.skill-card i {
+  font-size: 2.2rem;
+  color: var(--accent);
+  transition: var(--transition);
 }
 
-/* Sections */
+.skill-card:hover i {
+  color: var(--text-primary);
+  text-shadow: 0 0 12px var(--accent);
+}
 
-section {
-  /* The sections will be displayed in a flex container with a flex direction of column and align-items of center. This means that the children of the sections will be displayed one after the other, and the items will be centered vertically. */
+.skill-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 4px;
 }
 
-/* About */
-
-#about p {
-  /* The about page paragraph will have a max-width of 800px, a margin of 20px 0, a font size of 1.7rem, and will be text-aligned to the center. */
-  max-width: 800px;
-  font-size: 1.7rem;
-  text-align: center;
+.skill-name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.05rem;
 }
 
-#about ul {
-  /* The about page unordered list will be displayed in a flex container with justify-content of center, no list-style, and no padding. This means that the list items will be displayed one after the other, and there will be no bullets or spaces between them. */
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Education Timeline Layout */
+.education-timeline {
   display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 24px;
+  border-left: 1px solid var(--border-subtle);
+  gap: 32px;
+  max-width: 800px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -29.5px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-base);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Projects Section (Bento / Rhythm Grid) */
+.projects-grid {
+  grid-template-cols: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(0, 255, 65, 0.05);
+}
+
+/* Bento Grid Sizing Classes */
+.col-span-8 {
+  grid-column: span 8;
+}
+
+.col-span-4 {
+  grid-column: span 4;
+}
+
+.col-span-6 {
+  grid-column: span 6;
+}
+
+.col-span-12 {
+  grid-column: span 12;
+}
+
+/* Bento Background Diversity - Custom highlights */
+.project-highlight-1 {
+  background: radial-gradient(circle at 100% 0%, rgba(0, 255, 65, 0.08) 0%, var(--bg-surface) 60%);
+}
+
+.project-highlight-2 {
+  background: radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.08) 0%, var(--bg-surface) 60%);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.project-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  list-style: none;
-  padding: 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  transition: var(--transition);
 }
 
-#about li {
-  /* The about page list items will have a margin of 0 10px. This means that there will be no margin to the left and right of the list items, but there will be a margin of 10px to the bottom. */
-  margin: 0 10px;
+.project-card:hover .project-icon-badge {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
 }
 
-/* Skills */
-
-
-.fa-linux,
-.fa-python,
-.fa-figma,
-.fa-html5,
-.fa-css3-alt,
-.fa-react,
-.fa-js,
-.fa-node {
-  /* The skill icons will have a font size of clamp(2rem, 5vw, 5rem), a margin of 30px 10px, and a color of var(--primary). */
-  font-size: clamp(2rem, 5vw, 5rem);
-  color: var(--primary);
-  transition: color .5s ease-in;
-  transition: text-shadow .3s ease-in;
-  margin: 30px 10px;
+.project-links {
+  display: flex;
+  gap: 12px;
 }
 
-.fa-linux:hover,
-.fa-python:hover,
-.fa-figma:hover,
-.fa-html5:hover,
-.fa-css3-alt:hover,
-.fa-react:hover,
-.fa-js:hover,
-.fa-node:hover {
-  color: var(--secondary);
-  text-shadow: 0 0 50px #a6e3a1;
+.project-link {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
 }
 
-/* This code defines the style for the education section. */
+.project-link:hover {
+  color: var(--accent);
+}
 
-#education {
-  /* The education section will have a max-width of 100% and will be centered on the page. */
-  max-width: 100%;
-  text-align: center;
+.project-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.tech-tag.blue {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+/* Contact Section & Grid */
+.contact-grid {
+  grid-template-cols: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.contact-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.contact-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 255, 65, 0.05);
+}
+
+.contact-card i {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+.contact-card-title {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.contact-card-val {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.contact-card:hover .contact-card-val {
+  color: var(--accent);
+}
+
+/* Footer Section */
+footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  padding: 32px 0;
+  background-color: #03060c;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-
-  /* The margin attribute has been commented out because it is not necessary. */
-  /* margin: 0 auto; */
+  width: 100%;
 }
 
-#education h2 {
-  /* The h2 headings in the education section will have a margin-bottom of 30px and will be displayed full-width. */
-  max-width: 100%;
+.footer-logo {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
 }
 
-#education h3 {
-  /* The h3 headings in the education section will have a margin-bottom of 10px and will be displayed full-width. */
-  max-width: 100%;
+.footer-logo span {
+  color: var(--accent);
 }
 
-#education p {
-  /* The paragraphs in the education section will have a line-height of 1, will be displayed full-width, and will have a font size of 180%. */
-  line-height: 1;
-  max-width: 100%;
-  font-size: 180%;
-  color: #7f849c;
+/* Animation utilities & transitions */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-#education ul {
-  /* The unordered lists in the education section will have no list-style and will be displayed full-width. */
-  list-style: none;
-  max-width: 100%;
-
-  /* The padding-left attribute has been commented out because it is not necessary. */
-  /* padding-left: 0; */
+@keyframes revealIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-#education li {
-  /* The list items in the education section will have a line-height of 1.8 and will be displayed full-width. */
-  line-height: 1;
-  max-width: 100%;
-}
-
-/* This media query defines the style for the education section when the screen width is less than 600px. */
-
-@media (max-width: 600px) {
-
-  /* The education section will have padding of 20px. */
-  #education {
-    padding: 20px;
+/* Media Queries for Viewport & Responsiveness */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-cols: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .hero-content {
+    align-items: center;
+  }
+  
+  .hero-visual {
+    order: -1; /* image/terminal on top for tablet/mobile */
   }
 
-  /* The h2 headings in the education section will have a font size of 28px. */
-  #education h2 {
-    font-size: 28px;
+  .about-grid {
+    grid-template-cols: 1fr;
+    gap: 40px;
+    text-align: center;
   }
 
-  /* The h3 headings in the education section will have a font size of 20px. */
-  #education h3 {
-    font-size: 20px;
+  .about-avatar-wrapper {
+    order: -1;
   }
 
+  .col-span-8, .col-span-4, .col-span-6 {
+    grid-column: span 12;
+  }
 }
 
-/* This code defines the style for the projects section. */
-
-/* Projects Container */
-
-.projects {
-  /* The projects container will have overflow-x: auto, overflow-y: hidden, and white-space: nowrap. This will allow the projects to scroll horizontally if they are too wide to fit on the screen. */
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-
-  /* The projects container will be centered on the page and will have a max-width of 1000px. */
-  margin: 0 auto;
-  max-width: 1000px;
-
-  /* The projects container will have padding of 20px. */
-  padding: 20px;
-}
-
-.contributions {
-  /* The projects container will have overflow-x: auto, overflow-y: hidden, and white-space: nowrap. This will allow the projects to scroll horizontally if they are too wide to fit on the screen. */
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-
-  /* The projects container will be centered on the page and will have a max-width of 1000px. */
-  margin: 0 auto;
-  max-width: 1000px;
-
-  /* The projects container will have padding of 20px. */
-  padding: 20px;
-}
-
-/* Individual Projects */
-
-.project {
-  /* Each project will be displayed as an inline-block element with a width of 300px and a vertical alignment of top. It will also have a margin-right of 20px, a background color of #38355c, and rounded borders with a radius of 10px. */
-  display: inline-block;
-  width: 300px;
-  vertical-align: top;
-  margin-right: 20px;
-  background-color: #313244;
-  border-radius: 10px;
-  border: #45475a 3px solid;
-
-  /* The project will have padding of 20px between the content. */
-  padding: 20px;
-}
-
-/* Remove margin from last project */
-
-.project:last-child {
-  /* The last project will not have a margin-right of 20px. */
-  margin-right: 0;
-}
-
-/* Project Content Styling */
-
-.project h3 {
-  /* The h3 headings for each project will have a margin-top of 10px and a font size of 1.3rem. */
-  margin-top: 10px;
-  font-size: 1.3rem;
-}
-
-.project p {
-  /* The paragraphs for each project will have a color of #7f849c. */
-  color: #7f849c;
-}
-
-.contribution {
-  /* Each project will be displayed as an inline-block element with a width of 300px and a vertical alignment of top. It will also have a margin-right of 20px, a background color of #313244, and rounded borders with a radius of 10px. */
-  display: inline-block;
-  width: 300px;
-  vertical-align: top;
-  margin-right: 20px;
-  background-color: #313244;
-  border-radius: 10px;
-  border: #45475a 3px solid;
-
-  /* The project will have padding of 20px between the content. */
-  padding: 20px;
-}
-
-/* Remove margin from last project */
-
-.contribution:last-child {
-  /* The last project will not have a margin-right of 20px. */
-  margin-right: 0;
-}
-
-/* Project Content Styling */
-
-.contribution h3 {
-  /* The h3 headings for each project will have a margin-top of 10px and a font size of 1.3rem. */
-  margin-top: 10px;
-  font-size: 1.3rem;
-}
-
-.contribution p {
-  /* The paragraphs for each project will have a color of #7f849c. */
-  color: #7f849c;
-}
-
-
-
-/* This code defines the style for the contact section. */
-
-/* Contact */
-
-#contact p {
-  /* The paragraphs in the contact section will have a margin of 10px 0 and a font size of 1.4rem. */
-  margin: 10px 0;
-  font-size: 1.4rem;
-}
-
-#contact a {
-  /* The links in the contact section will be aligned to the center and will have text-align: center. */
-  align-items: center;
-  text-align: center;
-}
-
-#contact i {
-  /* The icons in the contact section will have a color of var(--secondary) and will have a margin-right of 10px. */
-  color: var(--secondary);
-  margin-right: 10px;
-}
-
-
-.last-contact-item,
-.footer {
-  padding-bottom: 20px;
-}
-
-/* Media Queries */
-
-@media (max-width: 600px) {
-
-  /* The header will change to a flex direction of column when the screen width is less than 600px. */
+@media (max-width: 768px) {
   header {
+    height: auto;
+    padding: 16px 0;
+  }
+
+  .header-container {
     flex-direction: column;
+    gap: 16px;
   }
 
-  /* The about image will change to a width of 180px and will be aligned to the center when the screen width is less than 600px. */
-  #about img {
-    width: 180px;
-    align-self: center;
+  nav {
+    gap: 20px;
   }
 
+  .hero {
+    min-height: auto;
+    padding: 60px 0;
+  }
 
+  .hero-title {
+    font-size: 2.5rem;
+  }
 
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
 
+  .btn {
+    width: 100%;
+  }
+
+  section.section {
+    padding: 60px 0;
+  }
+
+  .section-header {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* Accessibility Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
 }

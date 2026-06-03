@@ -1,160 +1,329 @@
-<!-- This is the DOCTYPE declaration. It tells the browser what version of HTML to use. -->
 <!DOCTYPE html>
-
-<!-- This is the opening HTML tag. -->
-<html>
-
-<!-- This is the head section of the HTML document. It contains information about the document, such as the title and the CSS styles. -->
-
+<html lang="en">
 <head>
-
-  <!-- This is the title of the document. It will be displayed in the browser's title bar. -->
-  <title>Ishaan Portfolio</title>
-
-  <!-- This link tag imports the Font Awesome CSS library. -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <!-- This link tag imports the CSS Stylesheet. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishaan Kumar | AI Engineer</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Portfolio of Ishaan Kumar, an AI Engineer specializing in AI Browser Autopilots, Reinforcement Learning, and Algorithmic Trading systems.">
+  <meta name="keywords" content="Ishaan Kumar, AI Engineer, Browser Autopilots, Playwright, PyTorch, Bennett University">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
-  <!-- This link tag imports the Inter font. -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-
 </head>
-
 <body>
+
+  <!-- Sleek Sticky Header -->
   <header>
-
-    <h1 class="port_heading">Ishaan's Portfolio</h1>
-    <nav>
-      <a class="about_nav" href="#about">About</a>
-
-      <a class="skills_nav" href="#skills">Skills</a>
-
-      <a class="projects_nav" href="#projects">Projects</a>
-
-      <a class="contact_nav" href="#contact">Contact</a>
-    </nav>
-
+    <div class="container header-container">
+      <a href="#" class="logo-link" id="nav-logo">
+        &lt;ishaan<span>.kumar</span> /&gt;
+      </a>
+      <nav id="main-navigation">
+        <a href="#about" id="nav-link-about">About</a>
+        <a href="#skills" id="nav-link-skills">Skills</a>
+        <a href="#projects" id="nav-link-projects">Projects</a>
+        <a href="#education" id="nav-link-education">Education</a>
+        <a href="#contact" id="nav-link-contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="about">
-
-    <h2 class="port_about">About Me</h2>
-
-    <img src="logo.png" alt="Profile Picture" class="logo_syn">
-
-    <p>hello i AM not a robot
-    
-    </p>
-    <p>Through our chapter, students get boundless opportunities and marvelous
-        exposures beyond the confined textbook syllabi. It has been a successful
-        journey for our chapter till date in the form of workshops, hackathons,
-        learning weekends, competitions and educational visits, all of which
-        with much more, continues to be delivered by us.</p>
-
-  </section>
-
-  <section id="skills">
-
-    <h2 class="port_skills">Skills</h2>
-
-    <div class="skill-icons">
-      <a href="https://github.com/torvalds/linux" target="_blank"><i class="fab fa-linux"></i></a>
-      <a href="https://python.org" target="_blank"><i class="fab fa-python"></i></a>
-      <a href="https://figma.com" target="_blank"><i class="fab fa-figma"></i></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><i class="fab fa-html5"></i></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><i class="fab fa-css3-alt"></i></a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><i class="fab fa-js"></i></a>
-      <a href="https://react.dev/" target="_blank"><i class="fab fa-react"></i></a>
-      <a href="https://nodejs.org" target="blank"><i class="fab fa-node"></i></a>
+  <!-- Hero Section -->
+  <section id="hero" class="hero reveal">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow" id="hero-tag">AI Engineer</div>
+        <h1 class="hero-title" id="hero-heading">Building <span>AI Browser Autopilots</span> and systems.</h1>
+        <p class="hero-desc" id="hero-description">AI Engineer specializing in reinforcement learning, medical computer vision, and autonomous web agent systems.</p>
+        <div class="hero-actions" id="hero-cta-group">
+          <a href="#projects" class="btn btn-primary" id="btn-view-projects">View Projects</a>
+          <a href="#contact" class="btn btn-secondary" id="btn-get-touch">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="terminal-box" id="hero-terminal">
+          <div class="terminal-header">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+            <div class="terminal-title">autopilot.sh</div>
+          </div>
+          <div class="terminal-body" id="terminal-content">
+            <div class="terminal-line">
+              <span class="path">~ $</span>
+              <span class="cmd">python launch_agent.py</span>
+            </div>
+            <div class="terminal-output">[INFO] Initializing Autopilot Engine...</div>
+            <div class="terminal-output">[INFO] Loading vision-guided reasoning model...</div>
+            <div class="terminal-output">[INFO] Target: checkout item & fill details.</div>
+            <div class="terminal-output">[ACTION] Clicking "Add to Cart" ... [SUCCESS]</div>
+            <div class="terminal-output">[ACTION] Inputting billing address ... [SUCCESS]</div>
+            <div class="terminal-output success">[SUCCESS] Task completed in 4.8s. Session closed.</div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </section>
 
-  <section id="education">
-
-    <h2 class="port_ed">Education</h2>
-    <p>Bennett University (2024-2028)</p>
-    <p>Delhi Public School</p>
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="about-heading">About <span>Me</span></h2>
+        <p class="section-subtitle">A glimpse into my background, research interests, and what drives my work in artificial intelligence.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text" id="about-details">
+          <p>I am an AI Engineer and student at Bennett University, dedicated to developing intelligent agent systems and autonomous solutions. My work focuses on building AI browser pilots that can navigate, interact, and execute tasks on the web just like a human.</p>
+          <p>Beyond agent systems, I conduct research in reinforcement learning applied to algorithmic trading and computer vision models for medical image anomaly detection. I aim to create technology that acts with high agency to solve complex, real-world problems.</p>
+        </div>
+        <div class="about-avatar-wrapper">
+          <div class="about-avatar-glow"></div>
+          <img src="logo.png" alt="Ishaan Kumar" class="logo_syn" id="about-avatar">
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="skills-heading">Tech <span>Stack</span></h2>
+        <p class="section-subtitle">The tools, libraries, and frameworks I use to bring artificial intelligence and automation models to life.</p>
+      </div>
+      <div class="grid skills-grid" id="skills-container">
+        <!-- 1. Python -->
+        <div class="skill-card" id="skill-python">
+          <i class="fab fa-python"></i>
+          <div class="skill-info">
+            <div class="skill-name">Python</div>
+            <div class="skill-tag">Core Development</div>
+          </div>
+        </div>
+        <!-- 2. PyTorch -->
+        <div class="skill-card" id="skill-pytorch">
+          <i class="fa-solid fa-fire"></i>
+          <div class="skill-info">
+            <div class="skill-name">PyTorch</div>
+            <div class="skill-tag">Deep Learning</div>
+          </div>
+        </div>
+        <!-- 3. React -->
+        <div class="skill-card" id="skill-react">
+          <i class="fab fa-react"></i>
+          <div class="skill-info">
+            <div class="skill-name">React.js</div>
+            <div class="skill-tag">Frontend Engine</div>
+          </div>
+        </div>
+        <!-- 4. Playwright / Browser API -->
+        <div class="skill-card" id="skill-playwright">
+          <i class="fa-solid fa-robot"></i>
+          <div class="skill-info">
+            <div class="skill-name">Playwright</div>
+            <div class="skill-tag">Web Automation</div>
+          </div>
+        </div>
+        <!-- 5. Node.js -->
+        <div class="skill-card" id="skill-node">
+          <i class="fab fa-node-js"></i>
+          <div class="skill-info">
+            <div class="skill-name">Node.js</div>
+            <div class="skill-tag">Backend Services</div>
+          </div>
+        </div>
+        <!-- 6. JavaScript / TypeScript -->
+        <div class="skill-card" id="skill-js-ts">
+          <i class="fab fa-js"></i>
+          <div class="skill-info">
+            <div class="skill-name">TS / JS</div>
+            <div class="skill-tag">Scripting Logic</div>
+          </div>
+        </div>
+        <!-- 7. Figma -->
+        <div class="skill-card" id="skill-figma">
+          <i class="fab fa-figma"></i>
+          <div class="skill-info">
+            <div class="skill-name">Figma</div>
+            <div class="skill-tag">UI/UX Design</div>
+          </div>
+        </div>
+        <!-- 8. Git / GitHub -->
+        <div class="skill-card" id="skill-git">
+          <i class="fab fa-github"></i>
+          <div class="skill-info">
+            <div class="skill-name">Git & GitHub</div>
+            <div class="skill-tag">Version Control</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Projects Section (Bento Grid Layout) -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="projects-heading">Selected <span>Work</span></h2>
+        <p class="section-subtitle">A curated showcase of engineering projects spanning browser agents, computer vision, and trading algorithms.</p>
+      </div>
+      <div class="grid projects-grid" id="projects-container">
+        
+        <!-- Project 1: AI Browser Autopilots (Bento Large) -->
+        <div class="project-card col-span-8 project-highlight-1" id="project-autopilot">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-compass"></i></div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">AI Browser Autopilot</h3>
+            <p class="project-desc">Developed autonomous web agents capable of executing multi-step workflows like checkout processes, form completion, and data extraction. Incorporates vision-language models and Playwright scripts for high-fidelity web page understanding and action execution.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Playwright</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">LLMs</span>
+              <span class="tech-tag">Computer Vision</span>
+            </div>
+          </div>
+        </div>
 
+        <!-- Project 2: Algorithmic Trading System (Bento Medium) -->
+        <div class="project-card col-span-4" id="project-trading">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">Algorithmic Trading</h3>
+            <p class="project-desc">Engineered reinforcement learning based trading strategies in PyTorch. Implemented simulated environments and backtesting routines to optimize trade entry and exit policies.</p>
+            <div class="project-tech">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Q-Learning</span>
+            </div>
+          </div>
+        </div>
 
-    <section id="projects">
-      <h2 class="port_projects">Projects</h2>
+        <!-- Project 3: Medical Image Detection (Bento Medium) -->
+        <div class="project-card col-span-6" id="project-medical">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-microscope"></i></div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">Medical Image Anomaly Detection</h3>
+            <p class="project-desc">Built computer vision pipelines utilizing convolutional neural networks and XGBoost ensembles to detect pneumonia signatures in X-ray datasets. Optimized accuracy for clinical diagnostics.</p>
+            <div class="project-tech">
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">XGBoost</span>
+              <span class="tech-tag">Computer Vision</span>
+            </div>
+          </div>
+        </div>
 
-      <section id="projects">
-        <div class="projects">
-          <div class="project">
-            <h3>ClubKonnect</h3>
+        <!-- Project 4: ClubKonnect (Bento Medium) -->
+        <div class="project-card col-span-6 project-highlight-2" id="project-clubkonnect">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-users"></i></div>
+            <div class="project-links">
+              <a href="https://github.com/CSI-Bennett-University/ClubKonnect" target="_blank" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">ClubKonnect</h3>
+            <p class="project-desc">Collaborated on a centralized event registration and club coordinator engagement platform for Bennett University student organizations, optimizing student activity registrations.</p>
+            <div class="project-tech">
+              <span class="tech-tag blue">React.js</span>
+              <span class="tech-tag blue">Node.js</span>
+              <span class="tech-tag blue">MongoDB</span>
+            </div>
+          </div>
+        </div>
 
-            <p>This is a description for project 1.</p>
+      </div>
+    </div>
+  </section>
 
-            <a
-              href="https://github.com/CSI-Bennett-University/ClubKonnect"
-              style="color: #b4befe; text-decoration: none"
-            >
-              <comment>View Project</comment>
-            </a>
-      </section>
-      
-    </section>
+  <!-- Education Section -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="education-heading">Education</h2>
+        <p class="section-subtitle">Academic milestones shaping my foundation in computer science and quantitative models.</p>
+      </div>
+      <div class="education-timeline" id="education-timeline-list">
+        
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item" id="timeline-university">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">2024 - 2028</div>
+          <h3 class="timeline-title">B.Tech in Computer Science & Engineering</h3>
+          <div class="timeline-desc">Bennett University • Specializing in Artificial Intelligence and Machine Learning models.</div>
+        </div>
 
-    <!-- This is the "Contact Us" section of the document. -->
-    <section id="contact">
-      <!-- This h2 heading defines the section title. -->
-      <h2 class="port_contact">Contact Us</h2>
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item" id="timeline-school">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">Graduated 2024</div>
+          <h3 class="timeline-title">Delhi Public School</h3>
+          <div class="timeline-desc">High School • Focused on Science, Mathematics, and Computer Science fields.</div>
+        </div>
 
-      <!-- This paragraph defines the contact information. -->
-      <p>
-        <!-- This icon links to the CSI GitHub repository. -->
-        <i class="fab fa-github"></i>
-        <a
-          href="https://github.com/CSI-Bennett-University"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color: #d5d4f0; text-decoration: none"
-        >
-          <!-- This is because the GitHub repository contains the project's source code. -->
-          <comment>GitHub: CSI</comment>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" id="contact-heading">Get in <span>Touch</span></h2>
+        <p class="section-subtitle">Have a question or want to discuss a project? Reach out using any of the platforms below.</p>
+      </div>
+      <div class="grid contact-grid" id="contact-container">
+        
+        <!-- Email Card -->
+        <a href="mailto:ishaanka111@gmail.com" class="contact-card" id="contact-card-email">
+          <i class="fa-solid fa-envelope"></i>
+          <div class="contact-card-title">Email</div>
+          <div class="contact-card-val">ishaanka111@gmail.com</div>
         </a>
-      </p>
 
-      <p>
-        <!-- This icon links to the CSI website. -->
-        <i class="fas fa-globe"></i>
-        <a
-          href="https://csi-bu.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color: #d5d4f0; text-decoration: none"
-        >
-          <!-- This is because the website contains more information about the CSI. -->
-          <comment>Website: csi-bu</comment>
+        <!-- GitHub Card -->
+        <a href="https://github.com/ik123a" target="_blank" rel="noopener noreferrer" class="contact-card" id="contact-card-github">
+          <i class="fab fa-github"></i>
+          <div class="contact-card-title">GitHub</div>
+          <div class="contact-card-val">github.com/ik123a</div>
         </a>
-      </p>
 
-      <p>
-        <i class="fab fa-linkedin"></i>
-        <a
-          href="https://www.linkedin.com/company/csi-bu/mycompany/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color: #d5d4f0; text-decoration: none"
-        >
-          <comment>LinkedIn: CSI</comment>
+        <!-- LinkedIn Card -->
+        <a href="https://linkedin.com/in/ik123a" target="_blank" rel="noopener noreferrer" class="contact-card" id="contact-card-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+          <div class="contact-card-title">LinkedIn</div>
+          <div class="contact-card-val">linkedin.com/in/ik123a</div>
         </a>
-      </p>
 
-      <p>
-        <i class="fas fa-envelope"></i>
-        <a
-          href="mailto:csi@bennett.edu.in"
-          style="color: #d5d4f0; text-decoration: none"
-        >
-          <comment>Email: csi@bennett.edu.in</comment>
-        </a>
-      </p>
-    </section>
-  </body>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple Footer -->
+  <footer>
+    <div class="container footer-container">
+      <div class="footer-logo" id="footer-logo-text">&lt;ishaan<span>.kumar</span> /&gt;</div>
+      <div id="footer-copyright">© 2026 Ishaan Kumar. All rights reserved.</div>
+    </div>
+  </footer>
+
+</body>
 </html>
