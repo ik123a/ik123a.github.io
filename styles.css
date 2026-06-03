@@ -61,7 +61,16 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   position: relative;
+}
+
+#content-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   perspective: 1200px;
+  z-index: 1;
 }
 
 /* ═══ CANVAS BACKGROUND ═══ */
@@ -133,9 +142,64 @@ header {
 }
 
 header.scrolled {
-  border-bottom-color: var(--border-subtle);
-  background: rgba(6, 9, 19, 0.92);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border-bottom-color: rgba(0, 255, 65, 0.15);
+  background: rgba(6, 9, 19, 0.90);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 15px rgba(0, 255, 65, 0.04);
+}
+
+/* ═══ SCROLL PROGRESS BAR ═══ */
+#scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+  transition: width 0.1s ease-out;
+  z-index: 101;
+}
+
+/* ═══ BACK TO TOP BUTTON ═══ */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+#back-to-top:hover {
+  border-color: var(--accent);
+  background: var(--bg-surface-hover);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.25), var(--shadow-card);
+  transform: translateY(-3px) scale(1.05);
+}
+
+#back-to-top:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .header-container {
@@ -1342,10 +1406,22 @@ footer {
 }
 
 /* ═══ SCROLLBAR ═══ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--bg-base);
+  transition: var(--transition);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
 
 /* ═══ MEDIA QUERIES ═══ */
 @media (max-width: 1024px) {
@@ -1375,11 +1451,46 @@ footer {
   .header-container { flex-wrap: wrap; gap: 12px; }
   .nav-toggle { display: flex; }
   nav {
-    display: none; width: 100%; flex-direction: column; gap: 4px;
-    padding-top: 12px; border-top: 1px solid var(--border-subtle);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                padding 0.3s ease,
+                visibility 0.4s;
   }
-  nav.active { display: flex; }
-  nav a { width: 100%; padding: 12px 16px; text-align: left; }
+  nav.active {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+    padding-top: 12px;
+    border-top-color: var(--border-subtle);
+  }
+  nav a {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    transform: translateY(-8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  nav.active a {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  nav.active a:nth-child(1) { transition-delay: 0.05s; }
+  nav.active a:nth-child(2) { transition-delay: 0.1s; }
+  nav.active a:nth-child(3) { transition-delay: 0.15s; }
+  nav.active a:nth-child(4) { transition-delay: 0.2s; }
+  nav.active a:nth-child(5) { transition-delay: 0.25s; }
+  nav.active a:nth-child(6) { transition-delay: 0.3s; }
 
   .hero { min-height: auto; padding: 100px 0 60px; }
   .hero-title { font-size: 2.2rem; }
