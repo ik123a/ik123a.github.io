@@ -3,44 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ishaan Kumar | AI Engineer</title>
-  
+  <title>Ishaan Kumar | AI Engineer & Developer</title>
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Portfolio of Ishaan Kumar, an AI Engineer specializing in AI Browser Autopilots, Reinforcement Learning, and Algorithmic Trading systems.">
-  <meta name="keywords" content="Ishaan Kumar, AI Engineer, Browser Autopilots, Playwright, PyTorch, Bennett University">
-  
+  <meta name="description" content="Portfolio of Ishaan Kumar - AI Engineer specializing in deep learning, computer vision, autonomous web agents, and algorithmic trading systems.">
+  <meta name="keywords" content="Ishaan Kumar, AI Engineer, Deep Learning, Computer Vision, PyTorch, Browser Automation, Bennett University">
+  <meta name="author" content="Ishaan Kumar">
+  <meta name="theme-color" content="#060913">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ishaan Kumar | AI Engineer">
+  <meta property="og:description" content="AI Engineer building intelligent systems - deep learning, computer vision, and autonomous agents.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ik123a.github.io">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Sleek Sticky Header -->
-  <header>
+  <!-- Particle Canvas Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Sticky Header -->
+  <header id="site-header">
     <div class="container header-container">
       <a href="#" class="logo-link" id="nav-logo">
-        &lt;ishaan<span>.kumar</span> /&gt;
+        &lt;ishaan<span>.dev</span> /&gt;
       </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav id="main-navigation">
         <a href="#about" id="nav-link-about">About</a>
         <a href="#skills" id="nav-link-skills">Skills</a>
         <a href="#projects" id="nav-link-projects">Projects</a>
+        <a href="#github" id="nav-link-github">GitHub</a>
         <a href="#education" id="nav-link-education">Education</a>
         <a href="#contact" id="nav-link-contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero reveal">
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+       Stack: Eyebrow > Headline > Subtext > CTAs
+       ═══════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <div class="hero-eyebrow" id="hero-tag">AI Engineer</div>
-        <h1 class="hero-title" id="hero-heading">Building <span>AI Browser Autopilots</span> and systems.</h1>
-        <p class="hero-desc" id="hero-description">AI Engineer specializing in reinforcement learning, medical computer vision, and autonomous web agent systems.</p>
+        <div class="hero-eyebrow" id="hero-tag">Available for Opportunities</div>
+        <h1 class="hero-title" id="hero-heading">Crafting <span>Intelligent Systems</span> that act.</h1>
+        <p class="hero-desc" id="hero-description">AI Engineer focused on deep learning, computer vision, and autonomous agent systems that solve complex real-world problems.</p>
         <div class="hero-actions" id="hero-cta-group">
-          <a href="#projects" class="btn btn-primary" id="btn-view-projects">View Projects</a>
-          <a href="#contact" class="btn btn-secondary" id="btn-get-touch">Get in Touch</a>
+          <a href="#projects" class="btn btn-primary" id="btn-view-projects">
+            <i class="fa-solid fa-code"></i> View Projects
+          </a>
+          <a href="#contact" class="btn btn-secondary" id="btn-get-touch">
+            <i class="fa-solid fa-paper-plane"></i> Get in Touch
+          </a>
         </div>
       </div>
       <div class="hero-visual">
@@ -49,111 +76,130 @@
             <div class="terminal-dot red"></div>
             <div class="terminal-dot yellow"></div>
             <div class="terminal-dot green"></div>
-            <div class="terminal-title">autopilot.sh</div>
+            <div class="terminal-title">agent_launch.py</div>
           </div>
           <div class="terminal-body" id="terminal-content">
             <div class="terminal-line">
-              <span class="path">~ $</span>
-              <span class="cmd">python launch_agent.py</span>
+              <span class="path">~/projects $</span>
+              <span class="cmd" id="typed-command"></span>
+              <span class="terminal-cursor" id="typing-cursor"></span>
             </div>
-            <div class="terminal-output">[INFO] Initializing Autopilot Engine...</div>
-            <div class="terminal-output">[INFO] Loading vision-guided reasoning model...</div>
-            <div class="terminal-output">[INFO] Target: checkout item & fill details.</div>
-            <div class="terminal-output">[ACTION] Clicking "Add to Cart" ... [SUCCESS]</div>
-            <div class="terminal-output">[ACTION] Inputting billing address ... [SUCCESS]</div>
-            <div class="terminal-output success">[SUCCESS] Task completed in 4.8s. Session closed.</div>
+            <div id="terminal-output-area"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- ═══════════════════════════════════════════════
+       ABOUT SECTION
+       ═══════════════════════════════════════════════ -->
   <section id="about" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2 class="section-title" id="about-heading">About <span>Me</span></h2>
-        <p class="section-subtitle">A glimpse into my background, research interests, and what drives my work in artificial intelligence.</p>
+        <p class="section-subtitle">A glimpse into my background, research focus, and what drives my work in AI and engineering.</p>
       </div>
       <div class="about-grid">
-        <div class="about-text" id="about-details">
-          <p>I am an AI Engineer and student at Bennett University, dedicated to developing intelligent agent systems and autonomous solutions. My work focuses on building AI browser pilots that can navigate, interact, and execute tasks on the web just like a human.</p>
-          <p>Beyond agent systems, I conduct research in reinforcement learning applied to algorithmic trading and computer vision models for medical image anomaly detection. I aim to create technology that acts with high agency to solve complex, real-world problems.</p>
+        <div class="about-text reveal">
+          <p>I am an AI Engineer and Computer Science student at Bennett University, building intelligent systems that bridge the gap between research and production. My core focus spans deep learning, autonomous web agents, and computer vision for real-world applications.</p>
+          <p>From training ResNet50 models for medical diagnostics to engineering browser automation pipelines and deepfake detection systems, I approach every project with the goal of creating technology that acts with high agency to solve meaningful problems.</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="stat-repos">8+</span>
+              <div class="stat-label">Repositories</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="stat-projects">6+</span>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="stat-tech">12+</span>
+              <div class="stat-label">Technologies</div>
+            </div>
+          </div>
         </div>
-        <div class="about-avatar-wrapper">
-          <div class="about-avatar-glow"></div>
-          <img src="logo.png" alt="Ishaan Kumar" class="logo_syn" id="about-avatar">
+        <div class="about-visual reveal reveal-delay-2">
+          <div class="about-avatar-wrapper">
+            <div class="about-avatar-glow"></div>
+            <img src="logo.png" alt="Ishaan Kumar - AI Engineer" class="logo_syn" id="about-avatar" loading="lazy">
+          </div>
+          <div class="about-socials">
+            <a href="https://github.com/ik123a" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub" id="social-github">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/ik123a" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn" id="social-linkedin">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:ishaanka111@gmail.com" class="social-link" title="Email" id="social-email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
+  <!-- ═══════════════════════════════════════════════
+       SKILLS / TECH STACK
+       ═══════════════════════════════════════════════ -->
   <section id="skills" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2 class="section-title" id="skills-heading">Tech <span>Stack</span></h2>
-        <p class="section-subtitle">The tools, libraries, and frameworks I use to bring artificial intelligence and automation models to life.</p>
+        <p class="section-subtitle">The tools, libraries, and frameworks powering my AI and full-stack projects.</p>
       </div>
       <div class="grid skills-grid" id="skills-container">
-        <!-- 1. Python -->
-        <div class="skill-card" id="skill-python">
+        <div class="skill-card reveal" id="skill-python">
           <i class="fab fa-python"></i>
           <div class="skill-info">
             <div class="skill-name">Python</div>
-            <div class="skill-tag">Core Development</div>
+            <div class="skill-tag">Core Language</div>
           </div>
         </div>
-        <!-- 2. PyTorch -->
-        <div class="skill-card" id="skill-pytorch">
+        <div class="skill-card reveal reveal-delay-1" id="skill-pytorch">
           <i class="fa-solid fa-fire"></i>
           <div class="skill-info">
             <div class="skill-name">PyTorch</div>
             <div class="skill-tag">Deep Learning</div>
           </div>
         </div>
-        <!-- 3. React -->
-        <div class="skill-card" id="skill-react">
+        <div class="skill-card reveal reveal-delay-1" id="skill-tensorflow">
+          <i class="fa-solid fa-brain"></i>
+          <div class="skill-info">
+            <div class="skill-name">TensorFlow</div>
+            <div class="skill-tag">ML Framework</div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2" id="skill-react">
           <i class="fab fa-react"></i>
           <div class="skill-info">
             <div class="skill-name">React.js</div>
-            <div class="skill-tag">Frontend Engine</div>
+            <div class="skill-tag">Frontend</div>
           </div>
         </div>
-        <!-- 4. Playwright / Browser API -->
-        <div class="skill-card" id="skill-playwright">
+        <div class="skill-card reveal reveal-delay-2" id="skill-node">
+          <i class="fab fa-node-js"></i>
+          <div class="skill-info">
+            <div class="skill-name">Node.js</div>
+            <div class="skill-tag">Backend Runtime</div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2" id="skill-js-ts">
+          <i class="fab fa-js"></i>
+          <div class="skill-info">
+            <div class="skill-name">TypeScript / JS</div>
+            <div class="skill-tag">Full Stack</div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-3" id="skill-playwright">
           <i class="fa-solid fa-robot"></i>
           <div class="skill-info">
             <div class="skill-name">Playwright</div>
             <div class="skill-tag">Web Automation</div>
           </div>
         </div>
-        <!-- 5. Node.js -->
-        <div class="skill-card" id="skill-node">
-          <i class="fab fa-node-js"></i>
-          <div class="skill-info">
-            <div class="skill-name">Node.js</div>
-            <div class="skill-tag">Backend Services</div>
-          </div>
-        </div>
-        <!-- 6. JavaScript / TypeScript -->
-        <div class="skill-card" id="skill-js-ts">
-          <i class="fab fa-js"></i>
-          <div class="skill-info">
-            <div class="skill-name">TS / JS</div>
-            <div class="skill-tag">Scripting Logic</div>
-          </div>
-        </div>
-        <!-- 7. Figma -->
-        <div class="skill-card" id="skill-figma">
-          <i class="fab fa-figma"></i>
-          <div class="skill-info">
-            <div class="skill-name">Figma</div>
-            <div class="skill-tag">UI/UX Design</div>
-          </div>
-        </div>
-        <!-- 8. Git / GitHub -->
-        <div class="skill-card" id="skill-git">
+        <div class="skill-card reveal reveal-delay-3" id="skill-git">
           <i class="fab fa-github"></i>
           <div class="skill-info">
             <div class="skill-name">Git & GitHub</div>
@@ -164,88 +210,150 @@
     </div>
   </section>
 
-  <!-- Projects Section (Bento Grid Layout) -->
+  <!-- ═══════════════════════════════════════════════
+       PROJECTS SECTION (BENTO GRID)
+       Real projects from github.com/ik123a
+       ═══════════════════════════════════════════════ -->
   <section id="projects" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2 class="section-title" id="projects-heading">Selected <span>Work</span></h2>
-        <p class="section-subtitle">A curated showcase of engineering projects spanning browser agents, computer vision, and trading algorithms.</p>
+        <p class="section-subtitle">A curated showcase of engineering projects spanning deep learning, computer vision, automation, and trading systems.</p>
       </div>
       <div class="grid projects-grid" id="projects-container">
-        
-        <!-- Project 1: AI Browser Autopilots (Bento Large) -->
-        <div class="project-card col-span-8 project-highlight-1" id="project-autopilot">
+
+        <!-- Project 1: RSNA Pneumonia Detection (HERO - Large) -->
+        <div class="project-card col-span-7 project-highlight-green reveal" id="project-rsna">
           <div class="project-header">
-            <div class="project-icon-badge"><i class="fa-solid fa-compass"></i></div>
+            <div class="project-icon-badge"><i class="fa-solid fa-lungs"></i></div>
             <div class="project-links">
-              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/ik123a/rsna-pneumonia-detection-challenge" target="_blank" rel="noopener noreferrer" class="project-link" title="View Source"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="project-details">
-            <h3 class="project-title">AI Browser Autopilot</h3>
-            <p class="project-desc">Developed autonomous web agents capable of executing multi-step workflows like checkout processes, form completion, and data extraction. Incorporates vision-language models and Playwright scripts for high-fidelity web page understanding and action execution.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Playwright</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">LLMs</span>
-              <span class="tech-tag">Computer Vision</span>
+            <h3 class="project-title">RSNA Pneumonia Detection</h3>
+            <p class="project-desc">Built computer vision pipelines for detecting pneumonia signatures in chest X-ray datasets from the RSNA challenge. Utilized CNN architectures and ensemble methods optimized for clinical diagnostic accuracy.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">CNN</span>
+                <span class="tech-tag">Computer Vision</span>
+                <span class="tech-tag blue">Medical AI</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot jupyter"></span> Jupyter</div>
             </div>
           </div>
         </div>
 
-        <!-- Project 2: Algorithmic Trading System (Bento Medium) -->
-        <div class="project-card col-span-4" id="project-trading">
+        <!-- Project 2: Deepfake Detection -->
+        <div class="project-card col-span-5 project-highlight-purple reveal reveal-delay-1" id="project-deepfake">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="project-links">
+              <a href="https://github.com/ik123a/deepfake-detection" target="_blank" rel="noopener noreferrer" class="project-link" title="View Source"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">Deepfake Detection</h3>
+            <p class="project-desc">Developed deep learning models to identify manipulated media content. Trained on face-swap datasets with frame-level analysis and temporal consistency checking.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag purple">Deep Learning</span>
+                <span class="tech-tag purple">CNNs</span>
+                <span class="tech-tag">Python</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot jupyter"></span> Jupyter</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: ResNet50 Transfer Learning -->
+        <div class="project-card col-span-5 project-highlight-blue reveal" id="project-resnet">
+          <div class="project-header">
+            <div class="project-icon-badge"><i class="fa-solid fa-diagram-project"></i></div>
+            <div class="project-links">
+              <a href="https://github.com/ik123a/resnet50-transfer-learning-cifar" target="_blank" rel="noopener noreferrer" class="project-link" title="View Source"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-details">
+            <h3 class="project-title">ResNet50 Transfer Learning</h3>
+            <p class="project-desc">Fine-tuned a pre-trained ResNet50 model on CIFAR-10 using transfer learning techniques. Achieved high classification accuracy with efficient training on limited compute.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag blue">ResNet50</span>
+                <span class="tech-tag blue">Transfer Learning</span>
+                <span class="tech-tag">CIFAR-10</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot jupyter"></span> Jupyter</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: TV-Trade -->
+        <div class="project-card col-span-7 project-highlight-amber reveal reveal-delay-1" id="project-tvtrade">
           <div class="project-header">
             <div class="project-icon-badge"><i class="fa-solid fa-chart-line"></i></div>
             <div class="project-links">
-              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/ik123a/tv-trade" target="_blank" rel="noopener noreferrer" class="project-link" title="View Source"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="project-details">
-            <h3 class="project-title">Algorithmic Trading</h3>
-            <p class="project-desc">Engineered reinforcement learning based trading strategies in PyTorch. Implemented simulated environments and backtesting routines to optimize trade entry and exit policies.</p>
-            <div class="project-tech">
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">Pandas</span>
-              <span class="tech-tag">Q-Learning</span>
+            <h3 class="project-title">TV-Trade: Algorithmic Trading</h3>
+            <p class="project-desc">Engineered an algorithmic trading system integrating TradingView signals with automated execution logic. Features real-time signal processing, risk management, and backtesting capabilities.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag amber">JavaScript</span>
+                <span class="tech-tag amber">Trading API</span>
+                <span class="tech-tag">Automation</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot javascript"></span> JavaScript</div>
             </div>
           </div>
         </div>
 
-        <!-- Project 3: Medical Image Detection (Bento Medium) -->
-        <div class="project-card col-span-6" id="project-medical">
+        <!-- Project 5: Zipwash -->
+        <div class="project-card col-span-6 reveal" id="project-zipwash">
           <div class="project-header">
-            <div class="project-icon-badge"><i class="fa-solid fa-microscope"></i></div>
+            <div class="project-icon-badge"><i class="fa-solid fa-shirt"></i></div>
             <div class="project-links">
-              <a href="#" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/ik123a/Zipwash" target="_blank" rel="noopener noreferrer" class="project-link" title="View Source"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="project-details">
-            <h3 class="project-title">Medical Image Anomaly Detection</h3>
-            <p class="project-desc">Built computer vision pipelines utilizing convolutional neural networks and XGBoost ensembles to detect pneumonia signatures in X-ray datasets. Optimized accuracy for clinical diagnostics.</p>
-            <div class="project-tech">
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">XGBoost</span>
-              <span class="tech-tag">Computer Vision</span>
+            <h3 class="project-title">Zipwash</h3>
+            <p class="project-desc">Full-stack on-demand laundry service application built with TypeScript. Features user scheduling, order tracking, and service provider management with a modern UI.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag blue">TypeScript</span>
+                <span class="tech-tag blue">React</span>
+                <span class="tech-tag">Full Stack</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot typescript"></span> TypeScript</div>
             </div>
           </div>
         </div>
 
-        <!-- Project 4: ClubKonnect (Bento Medium) -->
-        <div class="project-card col-span-6 project-highlight-2" id="project-clubkonnect">
+        <!-- Project 6: Browser Automation Suite -->
+        <div class="project-card col-span-6 project-highlight-green reveal reveal-delay-1" id="project-automation">
           <div class="project-header">
-            <div class="project-icon-badge"><i class="fa-solid fa-users"></i></div>
+            <div class="project-icon-badge"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
             <div class="project-links">
-              <a href="https://github.com/CSI-Bennett-University/ClubKonnect" target="_blank" class="project-link" title="Source Code"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/ik123a/leetcode-nvidia-auto" target="_blank" rel="noopener noreferrer" class="project-link" title="LeetCode Auto"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/ik123a/gfg-nvidia-auto" target="_blank" rel="noopener noreferrer" class="project-link" title="GFG Auto"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
           </div>
           <div class="project-details">
-            <h3 class="project-title">ClubKonnect</h3>
-            <p class="project-desc">Collaborated on a centralized event registration and club coordinator engagement platform for Bennett University student organizations, optimizing student activity registrations.</p>
-            <div class="project-tech">
-              <span class="tech-tag blue">React.js</span>
-              <span class="tech-tag blue">Node.js</span>
-              <span class="tech-tag blue">MongoDB</span>
+            <h3 class="project-title">Browser Automation Suite</h3>
+            <p class="project-desc">Autonomous agents for LeetCode and GeeksForGeeks platforms. Automates problem solving workflows, submission tracking, and progress synchronization using Playwright and headless browser scripting.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Playwright</span>
+                <span class="tech-tag amber">JavaScript</span>
+                <span class="tech-tag">Automation</span>
+              </div>
+              <div class="project-lang"><span class="lang-dot python"></span> Python + JS</div>
             </div>
           </div>
         </div>
@@ -254,76 +362,393 @@
     </div>
   </section>
 
-  <!-- Education Section -->
+  <!-- ═══════════════════════════════════════════════
+       GITHUB ACTIVITY SECTION
+       ═══════════════════════════════════════════════ -->
+  <section id="github" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title" id="github-heading">GitHub <span>Activity</span></h2>
+        <p class="section-subtitle">An overview of my open-source contributions and development activity on GitHub.</p>
+      </div>
+      <div class="github-stats-grid reveal">
+        <div class="github-card" id="github-repos">
+          <i class="fa-solid fa-folder-open"></i>
+          <span class="github-card-value">8+</span>
+          <div class="github-card-label">Public Repos</div>
+        </div>
+        <div class="github-card" id="github-languages">
+          <i class="fa-solid fa-code"></i>
+          <span class="github-card-value">5</span>
+          <div class="github-card-label">Languages</div>
+        </div>
+        <div class="github-card" id="github-stars">
+          <i class="fa-solid fa-star"></i>
+          <span class="github-card-value">1+</span>
+          <div class="github-card-label">Stars Earned</div>
+        </div>
+      </div>
+      <div class="github-contribution reveal reveal-delay-2">
+        <img
+          src="https://ghchart.rshah.org/00ff41/ik123a"
+          alt="Ishaan Kumar GitHub Contribution Graph"
+          id="github-contribution-chart"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       EDUCATION SECTION
+       ═══════════════════════════════════════════════ -->
   <section id="education" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2 class="section-title" id="education-heading">Education</h2>
-        <p class="section-subtitle">Academic milestones shaping my foundation in computer science and quantitative models.</p>
+        <p class="section-subtitle">Academic milestones building my foundation in computer science and AI.</p>
       </div>
-      <div class="education-timeline" id="education-timeline-list">
-        
-        <!-- Timeline Item 1 -->
+      <div class="education-timeline reveal" id="education-timeline-list">
         <div class="timeline-item" id="timeline-university">
           <div class="timeline-dot"></div>
           <div class="timeline-time">2024 - 2028</div>
           <h3 class="timeline-title">B.Tech in Computer Science & Engineering</h3>
-          <div class="timeline-desc">Bennett University • Specializing in Artificial Intelligence and Machine Learning models.</div>
+          <div class="timeline-desc">Bennett University, Greater Noida. Specialization in Artificial Intelligence and Machine Learning. Coursework includes deep learning, reinforcement learning, data structures, and distributed systems.</div>
         </div>
-
-        <!-- Timeline Item 2 -->
         <div class="timeline-item" id="timeline-school">
           <div class="timeline-dot"></div>
           <div class="timeline-time">Graduated 2024</div>
           <h3 class="timeline-title">Delhi Public School</h3>
-          <div class="timeline-desc">High School • Focused on Science, Mathematics, and Computer Science fields.</div>
+          <div class="timeline-desc">High School with focus on Science, Mathematics, and Computer Science. Built early programming fundamentals and problem-solving skills.</div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- ═══════════════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════════════ -->
   <section id="contact" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2 class="section-title" id="contact-heading">Get in <span>Touch</span></h2>
         <p class="section-subtitle">Have a question or want to discuss a project? Reach out using any of the platforms below.</p>
       </div>
-      <div class="grid contact-grid" id="contact-container">
-        
-        <!-- Email Card -->
+      <div class="grid contact-grid reveal" id="contact-container">
         <a href="mailto:ishaanka111@gmail.com" class="contact-card" id="contact-card-email">
           <i class="fa-solid fa-envelope"></i>
           <div class="contact-card-title">Email</div>
           <div class="contact-card-val">ishaanka111@gmail.com</div>
         </a>
-
-        <!-- GitHub Card -->
         <a href="https://github.com/ik123a" target="_blank" rel="noopener noreferrer" class="contact-card" id="contact-card-github">
           <i class="fab fa-github"></i>
           <div class="contact-card-title">GitHub</div>
           <div class="contact-card-val">github.com/ik123a</div>
         </a>
-
-        <!-- LinkedIn Card -->
         <a href="https://linkedin.com/in/ik123a" target="_blank" rel="noopener noreferrer" class="contact-card" id="contact-card-linkedin">
           <i class="fab fa-linkedin-in"></i>
           <div class="contact-card-title">LinkedIn</div>
           <div class="contact-card-val">linkedin.com/in/ik123a</div>
         </a>
-
       </div>
     </div>
   </section>
 
-  <!-- Simple Footer -->
+  <!-- Footer -->
   <footer>
     <div class="container footer-container">
-      <div class="footer-logo" id="footer-logo-text">&lt;ishaan<span>.kumar</span> /&gt;</div>
-      <div id="footer-copyright">© 2026 Ishaan Kumar. All rights reserved.</div>
+      <div class="footer-logo" id="footer-logo-text">&lt;ishaan<span>.dev</span> /&gt;</div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/ik123a" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <div id="footer-copyright">&copy; 2026 Ishaan Kumar. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       JAVASCRIPT: Animations & Interactivity
+       ═══════════════════════════════════════════════ -->
+  <script>
+  (function() {
+    'use strict';
+
+    // ─── PARTICLE CANVAS ────────────────────────────
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.min(Math.floor(window.innerWidth * 0.06), 80);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          radius: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.5 + 0.1,
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 65, ${p.opacity})`;
+        ctx.fill();
+
+        // Draw connections
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(0, 255, 65, ${0.06 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      });
+
+      animId = requestAnimationFrame(drawParticles);
+    }
+
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resizeCanvas();
+        createParticles();
+      }, 250);
+    });
+
+    // ─── HEADER SCROLL EFFECT ─────────────────────
+    const header = document.getElementById('site-header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = scrollY;
+    }, { passive: true });
+
+    // ─── MOBILE NAV TOGGLE ─────────────────────────
+    const navToggle = document.getElementById('nav-toggle');
+    const mainNav = document.getElementById('main-navigation');
+
+    navToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+
+    // Close nav when a link is clicked
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+      });
+    });
+
+    // ─── ACTIVE NAV LINK ON SCROLL ─────────────────
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 200;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+    // ─── TERMINAL TYPING ANIMATION ─────────────────
+    const commandText = 'python agent_launch.py --mode=autonomous';
+    const typedCmd = document.getElementById('typed-command');
+    const typingCursor = document.getElementById('typing-cursor');
+    const outputArea = document.getElementById('terminal-output-area');
+
+    const terminalOutputs = [
+      { text: '[INFO] Initializing neural network engine...', cls: '' },
+      { text: '[INFO] Loading ResNet50 + custom head...', cls: '' },
+      { text: '[INFO] Scanning target: chest_xray_dataset/', cls: '' },
+      { text: '[ACTION] Running inference on 5,863 images...', cls: '' },
+      { text: '[RESULT] Accuracy: 94.7% | F1: 0.93', cls: '' },
+      { text: '[SUCCESS] Pipeline completed. Models saved.', cls: 'success' },
+    ];
+
+    let charIndex = 0;
+    let outputIndex = 0;
+
+    function typeCommand() {
+      if (charIndex < commandText.length) {
+        typedCmd.textContent += commandText[charIndex];
+        charIndex++;
+        setTimeout(typeCommand, 35 + Math.random() * 25);
+      } else {
+        typingCursor.style.display = 'none';
+        setTimeout(showOutputs, 400);
+      }
+    }
+
+    function showOutputs() {
+      if (outputIndex < terminalOutputs.length) {
+        const output = terminalOutputs[outputIndex];
+        const div = document.createElement('div');
+        div.className = 'terminal-output' + (output.cls ? ' ' + output.cls : '');
+        div.textContent = output.text;
+        div.style.animation = 'terminalFade 0.4s ease forwards';
+        outputArea.appendChild(div);
+        outputIndex++;
+        setTimeout(showOutputs, 500 + Math.random() * 300);
+      } else {
+        // Restart after pause
+        setTimeout(() => {
+          typedCmd.textContent = '';
+          typingCursor.style.display = 'inline-block';
+          outputArea.innerHTML = '';
+          charIndex = 0;
+          outputIndex = 0;
+          typeCommand();
+        }, 4000);
+      }
+    }
+
+    // Start typing after a short delay
+    setTimeout(typeCommand, 800);
+
+    // ─── SCROLL REVEAL ─────────────────────────────
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ─── STAT NUMBER COUNT-UP ANIMATION ────────────
+    function animateCountUp(el, target, suffix) {
+      const duration = 1800;
+      const start = 0;
+      const startTime = performance.now();
+
+      function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const current = Math.floor(start + (target - start) * eased);
+        el.textContent = current + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    const statElements = document.querySelectorAll('.stat-number, .github-card-value');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const text = el.textContent.trim();
+          const match = text.match(/(\d+)(\D*)/);
+          if (match) {
+            const num = parseInt(match[1]);
+            const suffix = match[2] || '';
+            animateCountUp(el, num, suffix);
+          }
+          statObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statElements.forEach(el => statObserver.observe(el));
+
+    // ─── SMOOTH SCROLL FOR ANCHOR LINKS ────────────
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 80; // header height
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ─── TILT EFFECT ON PROJECT CARDS ──────────────
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / centerY * -3;
+        const rotateY = (x - centerX) / centerX * 3;
+        card.style.transform = `translateY(-4px) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) perspective(800px) rotateX(0) rotateY(0)';
+      });
+    });
+
+  })();
+  </script>
 
 </body>
 </html>
