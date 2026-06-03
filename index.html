@@ -669,6 +669,10 @@
 
     // ─── 3D TILT EFFECT ON PROJECT CARDS ───────────
     document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        // Override transition delay from scroll reveal so it's instantly responsive
+        card.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease';
+      });
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
@@ -678,7 +682,11 @@
         card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px) translateY(-4px)`;
       });
       card.addEventListener('mouseleave', () => {
+        // Smoothly return to original state over 0.5s
+        card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease';
         card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0) translateY(0)';
+        // Reset the inline transition style after it finishes
+        setTimeout(() => { card.style.transition = ''; }, 500);
       });
     });
 
