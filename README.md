@@ -1,83 +1,98 @@
-# System Dossier — Ishaan Kumar
+# Ishaan Kumar — System Dossier
 
-Portfolio site for **Ishaan Kumar**, AI Systems Engineer. Built as a static site with no
-framework, no build step and no runtime dependencies.
+Static portfolio for **AI Systems Engineer | Agentic AI | Applied ML | Full-Stack**.
+The technical-dossier design uses warm paper typography, a near-black background,
+orange annotations and a decorative canvas schematic.
 
-**Live:** [https://ik123a.github.io/](https://ik123a.github.io/)
+[Live site](https://ik123a.github.io/) · [Public repositories](https://github.com/ik123a?tab=repositories)
 
----
+## Preview
 
-## Design
+Actual browser captures of this checkout, served locally in headless Microsoft Edge
+on 7 November 2026. Reduced motion was enabled for stable captures. These are site
+screenshots, not generated mockups or proof that the featured projects are deployed.
 
-The site is built as a *technical dossier*: warm bone typography on near-black, cut through
-with a machine-annotation layer of monospace labels, section indices, edge tick rulers and
-data-dense spec tables.
+![Desktop portfolio at 1440 × 1000](docs/images/desktop-hero.png)
 
-| Token | Value | Role |
-| --- | --- | --- |
-| `--ink` | `#0A0A0C` | Page substrate |
-| `--paper` | `#F2EEE6` | Primary type — warm bone, not pure white |
-| `--signal` | `#FF4A1C` | Single accent, used sparingly |
-| `--amber` / `--mint` | `#F5B841` / `#5EE6C4` | Data-only secondary states |
-| Display | Archivo (variable) | Uses the `wdth` axis for the large hero setting |
-| Annotation | JetBrains Mono | All labels, indices, metadata |
-| Editorial | Instrument Serif | One pull-quote only |
+Desktop: identity, professional focus and direct links to the work and source.
+[Full-page desktop capture](docs/images/desktop.png).
 
-Signature elements: a graph-paper substrate, fixed edge rails with a live scroll readout, a
-canvas **signal bus** (a sparse orthogonal schematic with travelling pulses — a dependency
-graph, not a particle field), a scrubbed marquee, and a film-grain overlay.
+![Mobile portfolio at 390 × 844](docs/images/mobile-hero.png)
 
-## Structure
+Mobile: the introduction and work links precede the decorative schematic.
+[Full-page mobile capture](docs/images/mobile.png).
 
-Single page, seven numbered sections:
+![Selected projects and their implementation limits](docs/images/selected-work.png)
 
-```
-00 / INDEX      hero, live stat readout, signal bus
-01 / MANIFESTO  positioning + identity plate
-02 / WORK       three featured projects
-03 / INDEX      all 25 repositories, filterable by domain
-04 / STACK      spec tables grouped by discipline
-05 / SIGNAL     contribution graph + stats
-06 / CONTACT    email, GitHub, LinkedIn
-```
+Selected work: implementation summaries and explicit prototype/research limits.
 
-## Files
+## Run locally
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | Whole page. All 25 repositories are inline, so the site renders fully without JavaScript |
-| `styles.css` | Design system, layout, motion |
-| `app.js` | Preloader, reveals, signal bus, filters, counters, scroll chrome |
-| `avatar.png` | `IK` monogram used as the identity plate |
-
-Asset paths are relative, so the site works from any subpath.
-
-## Accessibility and resilience
-
-- Semantic landmarks, skip link, visible focus rings, `aria-pressed` filter state
-- `prefers-reduced-motion` fully honoured — no marquee, no `requestAnimationFrame`, all
-  reveal content forced visible
-- Content is visible with JavaScript disabled; reveal animations are gated behind a `js`
-  class set in `<head>`
-- Every DOM lookup in `app.js` is null-guarded, so a markup change cannot throw
-- The contribution-graph image is third-party and degrades to a CSS dot-matrix on error
-
-## Refreshing the repository data
-
-Repository metadata is **curated into the markup** rather than fetched at runtime. The
-unauthenticated GitHub API allows only 60 requests per hour per IP, so a static site would
-start returning `403` for most visitors and the headline numbers would flip between live and
-fallback values.
-
-To refresh, update in `index.html`:
-
-- headline counts — the `data-count` attributes on `#stat-repos`, `#stat-stars`, `#stat-langs`
-- per-repository stars — the `.repo__stars` label text
-- per-repository language — the `.repo__lang` text and the `--p` values on `.langbar`
-
-## Local preview
+No framework, package install or build step is required to serve the site.
+From the repository root:
 
 ```bash
-python -m http.server 8123
-# open http://localhost:8123/
+python -m http.server 8123 --bind 127.0.0.1
 ```
+
+Open [the local preview](http://127.0.0.1:8123/). Stop it with Ctrl+C.
+GitHub Pages can serve the same static files; deployment is managed separately.
+
+## What the site does
+
+- Seven sections: introduction, manifesto, selected work, repository index, stack,
+  contribution activity and contact.
+- A dated snapshot of 27 public repositories owned by `ik123a`, including learning
+  exercises and profile/site repositories. Domain filters update their visible count
+  and pressed state. Metadata is curated in HTML, not fetched from GitHub at runtime.
+- Responsive navigation with keyboard focus on opening, Escape to close and return
+  focus, and automatic closure when switching to desktop width.
+- Skip link, visible focus styles, reduced-motion CSS and a canvas loop that stops
+  when reduced motion is enabled or the tab is hidden.
+- Content remains visible when JavaScript is disabled or `app.js` fails to load.
+  No-JavaScript visitors get section links and the complete repository index;
+  interactive filters are hidden.
+
+`index.html` contains all content. `styles.css` contains layout and visual tokens.
+`app.js` progressively enhances the page. `avatar.png` is the identity monogram.
+`tests/smoke.py` exercises the actual local page and can reproduce the captures.
+
+## Verify and capture
+
+The optional browser checks require Python, the Python `playwright` package and an
+installed Microsoft Edge browser. They use headless Edge; no browser download,
+credentials, model API or project backend is needed. No tools are installed by the script.
+
+```bash
+python tests/smoke.py -v
+python tests/smoke.py --capture docs/images
+```
+
+The script starts a temporary static server bound to `127.0.0.1` and closes it on
+completion. Tests block external requests, covering offline fallback rendering,
+filter counts, mobile navigation, changed reduced-motion preference, local anchor
+links, the identity image and layout at 320, 390, 768 and 1440 pixels. Captures allow
+the page's normal external assets and scroll through the actual sections before saving.
+Browser support beyond the tested Edge environment and screen-reader behavior are
+not established by this smoke suite.
+
+## Data and limits
+
+Repository snapshot: **7 November 2026**. To refresh it, review the public inventory,
+update repository links, primary-language labels, domain totals, headline totals and
+snapshot dates together, then rerun the browser checks. Private repositories do not
+belong in this public index. Stars and language percentages were removed because the
+previous values had no verified snapshot date.
+
+Project descriptions summarize source and intent; they do not establish deployment,
+financial returns, field savings, clinical use or cryptographic security. In particular,
+VaultMind's process runner provides working-directory preflight checks and a timeout,
+not OS isolation. Optional LLM judges in agenttest can vary and use external providers.
+CA-HE remains an experimental cryptography project without an independent security
+assessment presented here. Consult each repository's current documentation and limits.
+
+Google Fonts and the contribution image from `ghchart.rshah.org` are third-party
+requests. Font stacks fall back to local fonts; a failed chart gets a decorative
+placeholder and an unavailable label. The schematic and placeholder are illustrative,
+not live service status or contribution measurements. The page contains external
+GitHub, LinkedIn and email links; their availability is outside this repository.
