@@ -217,7 +217,7 @@ main { position: relative; z-index: 2; }
   inset: 0;
   z-index: 150;
   background: var(--ink);
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-end;
   gap: 14px;
@@ -225,6 +225,8 @@ main { position: relative; z-index: 2; }
   font-family: var(--mono);
   transition: opacity 0.5s var(--ease), visibility 0.5s;
 }
+.js .boot { display: flex; }
+.js .boot[hidden] { display: none; }
 .boot.is-done { opacity: 0; visibility: hidden; }
 
 .boot__inner {
@@ -778,7 +780,7 @@ main { position: relative; z-index: 2; }
 .feat__foot {
   margin-top: auto;
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
   padding-top: 20px;
@@ -827,12 +829,15 @@ main { position: relative; z-index: 2; }
 
 /* ---------- 16. FILTERS ---------- */
 .filters {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 8px;
   padding-bottom: 22px;
   border-bottom: var(--hair);
 }
+.js .filters { display: flex; }
+.nojs-nav { position: relative; z-index: 2; padding: 100px var(--gutter) 0; }
+.nojs-nav a { display: inline-block; margin: 8px 20px 8px 0; text-decoration: underline; }
 .filter {
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -902,7 +907,7 @@ main { position: relative; z-index: 2; }
 .repo:hover::before { transform: scaleX(1); }
 
 .repo.is-hidden { display: none; }
-.repo.is-meta { opacity: 0.55; }
+.repo.is-meta { background: var(--ink-2); }
 .repo.is-meta:hover { opacity: 1; }
 
 .repo__head {
@@ -932,7 +937,7 @@ main { position: relative; z-index: 2; }
 
 .repo__foot {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 12px;
   padding-top: 14px;
@@ -1128,10 +1133,10 @@ main { position: relative; z-index: 2; }
 @media (max-width: 1040px) {
   .hero__grid {
     grid-template-columns: 1fr;
-    grid-template-areas: "eyebrow" "title" "viz" "lead";
+    grid-template-areas: "eyebrow" "title" "lead" "viz";
   }
   .hero__grid > .hero__lead { padding-top: clamp(24px, 4vw, 34px); }
-  .hero__viz { min-height: 300px; }
+  .hero__viz { min-height: 300px; margin-top: 28px; }
   .manifesto { grid-template-columns: 1fr; }
   .plate { position: static; max-width: 460px; }
   .signal { grid-template-columns: 1fr; }
@@ -1139,7 +1144,7 @@ main { position: relative; z-index: 2; }
 
 @media (max-width: 880px) {
   .nav, .masthead .btn--sm { display: none; }
-  .burger { display: flex; }
+  .js .burger { display: flex; }
   .feature { grid-template-columns: 1fr; }
   .feat--wide { grid-column: auto; }
   .feat__foot { grid-template-columns: 80px 1fr; row-gap: 14px; }
@@ -1159,6 +1164,8 @@ main { position: relative; z-index: 2; }
   .readout--signal { grid-template-columns: 1fr; }
   .repos, .specs { grid-template-columns: 1fr; }
   .filters { gap: 6px; }
+  .spec__items li { flex-wrap: wrap; gap: 4px; }
+  .spec__meta { flex: 1 1 100%; text-align: left; }
   .filter { padding: 9px 11px; font-size: 0.62rem; }
   .contact__list a { grid-template-columns: 1fr 18px; row-gap: 8px; }
   .contact__k { grid-column: 1 / -1; }

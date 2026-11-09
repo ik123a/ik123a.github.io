@@ -1,12 +1,11 @@
 /* ==========================================================================
    ISHAAN KUMAR — SYSTEM DOSSIER · behaviour layer
-   No dependencies. Every DOM lookup is null-guarded so a markup change can
-   never throw and strand the page. All motion is gated on
-   prefers-reduced-motion, and the rAF loop parks itself when the tab is
-   hidden.
+   No runtime libraries. Optional DOM regions are guarded. Decorative motion
+   respects prefers-reduced-motion; the canvas loop parks when the tab is hidden.
    ========================================================================== */
 (function () {
   'use strict';
+  document.documentElement.classList.add('js');
 
   var $  = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
@@ -277,14 +276,16 @@
 
     if (!build()) return;
 
-    if (reduceMotion.matches) {
-      draw();                       // static schematic, no rAF at all
-    } else {
-      start();
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) { stop(); } else { start(); }
-      });
+    function syncMotion() {
+      if (reduceMotion.matches || document.hidden) {
+        stop();
+        pulses.length = 0;
+        draw();
+      } else { start(); }
     }
+    syncMotion();
+    document.addEventListener('visibilitychange', syncMotion);
+    reduceMotion.addEventListener('change', syncMotion);
 
     var resizeTimer = 0;
     window.addEventListener('resize', function () {
@@ -376,10 +377,14 @@
     var menu = document.getElementById('mobile-nav');
     if (!btn || !menu) return;
 
-    function set(open) {
+    function set(open, restoreFocus) {
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
       menu.hidden = !open;
+      if (open) {
+        var first = $('a', menu);
+        if (first) first.focus();
+      } else if (restoreFocus) { btn.focus(); }
     }
 
     btn.addEventListener('click', function () {
@@ -391,7 +396,14 @@
     });
 
     window.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') set(false);
+      if (e.key === 'Escape' && !menu.hidden) set(false, true);
+    });
+    window.matchMedia('(min-width: 881px)').addEventListener('change', function (e) {
+      if (!e.matches) return;
+      var hadFocus = menu.contains(document.activeElement);
+      set(false);
+      var desktopLink = $('.nav a');
+      if (hadFocus && desktopLink) desktopLink.focus();
     });
   })();
 
@@ -493,10 +505,7 @@
     }, 6000);
   })();
 
-  /* Repository metadata is curated into the markup rather than fetched at
-     runtime: the unauthenticated GitHub API allows only 60 requests per hour
-     per IP, so a static site would 403 for most visitors and the headline
-     numbers would flip between live and fallback values. To refresh, update
-     the data-count attributes and the per-card star labels in index.html. */
+  /* Repository metadata is a dated public snapshot curated into index.html.
+     Refresh cards, counts, primary languages, and the snapshot date together. */
 
 })();
